@@ -2,14 +2,8 @@ module Protector::InheritedResources
   module InstanceMethods
     extend ActiveSupport::Concern
 
-    included do
-      alias_method_chain :end_of_association_chain, :protector
-    end
-
-    private
-
-    def end_of_association_chain_with_protector
-      resource = end_of_association_chain_without_protector
+    def end_of_association_chain
+      resource = super
 
       subject = self.class.effective_protector_subject
 
